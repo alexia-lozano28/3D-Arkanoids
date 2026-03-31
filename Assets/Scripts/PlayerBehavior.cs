@@ -52,4 +52,6 @@ public class PlayerBehavior : MonoBehaviour
         pos.z = Mathf.Clamp(pos.z, minZ, maxZ);
         transform.position = pos;
     }
+
+
 }

@@ -1,7 +1,4 @@
-using System.Threading.Tasks;
 using TMPro;
-using TreeEditor;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class BallMovement : MonoBehaviour
@@ -13,7 +10,8 @@ public class BallMovement : MonoBehaviour
     private Vector3 velocity;
     public float factor = 5.0f;
     public TMP_Text myText;
-
+    public Vector3 initialPosition;
+    public int lifes = 2;
     public int hitCount;
     void Start()
     {
@@ -21,9 +19,21 @@ public class BallMovement : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        if(lifes <= 0){
+            myText.text = "Game Over";
+            return;
+        }
+        float halfHeight = playArea.GetComponent<Renderer>().bounds.size.x * 0.5f;
+        // float halfHeight = playArea.transform.localScale.x * 0.5f;
+        if (transform.position.x > halfHeight || transform.position.x < -halfHeight)
+        {
+            lifes--;
+            transform.position = initialPosition;
 
+        }
         transform.position += velocity * Time.deltaTime;
+
     }
 
     // void OnCollisionEnter(Collision collision)
