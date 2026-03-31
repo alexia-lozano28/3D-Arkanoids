@@ -23,13 +23,13 @@ public class PlayerBehavior : MonoBehaviour
         if (Keyboard.current.leftArrowKey.isPressed)
         {
             dir = -1;
-            Debug.Log("Key is pressed left");
+            // Debug.Log("Key is pressed left");
         }
             
         else if (Keyboard.current.rightArrowKey.isPressed)
         {
             dir = 1;
-            Debug.Log("Key is pressed right");
+            // Debug.Log("Key is pressed right");
         }
             
 

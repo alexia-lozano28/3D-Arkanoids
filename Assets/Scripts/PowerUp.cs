@@ -25,6 +25,12 @@ public class PowerUp : MonoBehaviour
     void ApplyPowerUp(GameObject player)
     {
         PlayerController controller = player.GetComponent<PlayerController>();
+        
+        if (controller == null)
+        {
+            Debug.LogError("PlayerController not found on player: " + player.name);
+            return;
+        }
 
         Debug.Log("Applying power-up: " + type);
         switch (type)
@@ -43,18 +49,23 @@ public class PowerUp : MonoBehaviour
                 break;
             case PowerUpType.MultiBall:
                 // Spawn additional balls
-                FindObjectOfType<BallSpawner>().SpawnExtraBalls();
+                BallSpawner spawner = FindFirstObjectByType<BallSpawner>();
+                if (spawner != null)
+                    spawner.SpawnExtraBalls();
+                else
+                    Debug.LogError("BallSpawner not found in scene");
                 break;
         }
     }
 
       void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {        
-            ApplyPowerUp(other.gameObject);
-            // Debug.Log("Power-up applied: " + type);
-            Destroy(gameObject);
-        }
+    {   
+        if(other.gameObject.tag != "Player")
+            return;
+        Debug.Log("Trigger enter " + type);    
+        ApplyPowerUp(other.gameObject);
+        Debug.Log("Power-up applied: " + type);
+        Destroy(gameObject);
+        Debug.Log("Power-up destroyed: " + type);
     }
 }
