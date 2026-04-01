@@ -9,8 +9,12 @@ public class BrickBehavior : MonoBehaviour
     public float powerUpChance = 0.2f; // 20% chance to drop a power-up
     public float powerUpFallSpeed = 2f; // Speed at which the power-up falls
     public GameObject[] powerUpPrefabs; // Array of power-up prefabs to choose
+    public int lenghtPowerUpsn =4;
     void Start()
     {
+        Debug.Log("length: " + powerUpPrefabs.Length);
+        Debug.Log("powerUpPrefabsx: " + powerUpPrefabs);
+
 
     }
     void OnTriggerEnter(Collider other)
@@ -24,8 +28,18 @@ public class BrickBehavior : MonoBehaviour
             Destroy(gameObject);
             if (Random.value < powerUpChance)
             {
-                int index = Random.Range(0, powerUpPrefabs.Length);
+                int index = Random.Range(0, lenghtPowerUpsn);
+                Debug.Log("indeex: " + index);
                 GameObject powerUp = Instantiate(powerUpPrefabs[index], transform.position, powerUpPrefabs[index].transform.rotation);
+                
+                // Set the power-up type based on index
+                PowerUp powerUpScript = powerUp.GetComponent<PowerUp>();
+                if (powerUpScript != null)
+                {
+                    powerUpScript.type = (PowerUpType)index;
+                    Debug.Log("Power-up type set to: " + powerUpScript.type);
+                }
+                
                 Rigidbody rb = powerUp.GetComponent<Rigidbody>();
                 if (rb == null)
                 {

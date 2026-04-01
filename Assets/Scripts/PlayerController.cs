@@ -26,21 +26,24 @@ public class PlayerController : MonoBehaviour
     }
     public void IncreaseBallSpeed(float duration)
     {
-        var ball = FindObjectOfType<BallMovement>();
+       
+        var ball = FindFirstObjectByType<BallMovement>();
         ball.speed *= 1.5f;
+        Debug.Log("Increasing ball speed for duration: " + ball.speed);
         Invoke("ResetBallSpeed", duration);
     }
 
     void ResetBallSpeed()
     {
-        var ball = FindObjectOfType<BallMovement>();
+        var ball = FindFirstObjectByType<BallMovement>();
         ball.speed /= 1.5f;
     }
     
     public void AddExtraLife()
     {
-        var ball = FindObjectOfType<BallMovement>();
+        var ball = FindFirstObjectByType<BallMovement>();
         ball.lifes++;
+        Debug.Log("Extra life added. Total lives: " + ball.lifes);
     }
 
 
