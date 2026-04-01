@@ -9,10 +9,12 @@ UserSettings/
 *.csproj
 *.unityproj
 *.sln
+*.slnx
 *.user
 *.pidb
 *.booproj
 *.svd
 
+*.app/
 .DS_Store
 Thumbs.db
