@@ -1,3 +1,4 @@
+// using System.Diagnostics;
 using UnityEngine;
 
 public class BrickBehavior : MonoBehaviour
@@ -22,11 +23,13 @@ public class BrickBehavior : MonoBehaviour
         lives--;
 
         Debug.Log("impactando, vidas: " + lives);
-
+        
         if (lives <= 0)
         {
             Destroy(gameObject);
-            if (Random.value < powerUpChance)
+            float prob = Random.value;
+            Debug.Log("Random value for power-up drop: " + prob);
+            if (prob < powerUpChance)
             {
                 int index = Random.Range(0, lenghtPowerUpsn);
                 Debug.Log("indeex: " + index);

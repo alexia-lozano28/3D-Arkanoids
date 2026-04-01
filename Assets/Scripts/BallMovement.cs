@@ -10,6 +10,7 @@ public class BallMovement : MonoBehaviour
     private Vector3 velocity;
     public float factor = 5.0f;
     public TMP_Text myText;
+    public TMP_Text lifesText;
     public Vector3 initialPosition;
     public int lifes = 2;
     public int hitCount;
@@ -22,6 +23,7 @@ public class BallMovement : MonoBehaviour
     {   
         if(lifes <= 0){
             myText.text = "Game Over";
+            Destroy(gameObject);
             return;
         }
         float halfHeight = playArea.GetComponent<Renderer>().bounds.size.x * 0.5f;
@@ -29,6 +31,7 @@ public class BallMovement : MonoBehaviour
         if (transform.position.x > halfHeight || transform.position.x < -halfHeight)
         {
             lifes--;
+            lifesText.text = "Lives: " + lifes;
             transform.position = initialPosition;
 
         }
